@@ -21,7 +21,7 @@ cp /tmp/overlay/etc/udev/rules.d/*.rules $SDCARD/etc/udev/rules.d/
 
 # Update package list and install packages
 apt-get update
-apt-get install -y ustreamer git python3-numpy python3-matplotlib libatlas-base-dev
+apt-get install -y ustreamer git python3-numpy python3-matplotlib libatlas-base-dev git
 
 # Add user 'mks'
 useradd -m -G sudo -s /bin/bash mks || true
