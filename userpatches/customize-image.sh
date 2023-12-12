@@ -24,13 +24,15 @@ apt-get update
 apt-get install -y ustreamer git python3-numpy python3-matplotlib libatlas-base-dev git
 
 # Add user 'mks'
-sudo adduser --gecos "" --disabled-password mks
+adduser --gecos "" --disabled-password mks
+
 
 # Set password for both 'mks' and 'root' to 'makerbase'
 echo 'mks:makerbase' | chpasswd
 echo 'root:makerbase' | chpasswd
 
 # Add 'mks' to 'gpio' and 'spiusers' groups, create groups if they don't exist
+usermod -aG sudo mks
 groupadd gpio || true
 groupadd spiusers || true
 usermod -a -G gpio,spiusers mks
