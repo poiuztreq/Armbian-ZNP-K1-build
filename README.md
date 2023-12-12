@@ -11,7 +11,7 @@ To build the Armbian image for ZNP-K1, follow these steps:
 1. **Clone the Repository**  
    Clone this repository to your local machine using the command:
    ```bash
-   git clone https://github.com/halfmanbear/Armbian-ZNP-K1-build.git
+   git clone --depth=1 -b main https://github.com/halfmanbear/Armbian-ZNP-K1-build.git
    ```
 2. **Navigate to the Repository Directory**  
 
