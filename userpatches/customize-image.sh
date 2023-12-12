@@ -55,4 +55,4 @@ CRON_ENTRY="*/10 * * * * /bin/sync"
 mkdir /home/mks
 
 # Clone Git repository as user 'mks'
-su - mks -c "git clone https://github.com/halfmanbear/OpenNept4une.git /home/mks/OpenNept4une"
+git clone https://github.com/halfmanbear/OpenNept4une.git /home/mks/OpenNept4une
