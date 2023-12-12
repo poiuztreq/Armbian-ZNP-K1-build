@@ -52,5 +52,7 @@ sed -i "/^exit 0/i $SCRIPT_PATH" "$RC_LOCAL"
 CRON_ENTRY="*/10 * * * * /bin/sync"
 (crontab -l 2>/dev/null | grep -qF "$CRON_ENTRY") || (crontab -l 2>/dev/null; echo "$CRON_ENTRY") | crontab -
 
+mkdir /home/mks
+
 # Clone Git repository as user 'mks'
 su - mks -c "git clone https://github.com/halfmanbear/OpenNept4une.git /home/mks/OpenNept4une"
