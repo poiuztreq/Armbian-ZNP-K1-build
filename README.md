@@ -1,3 +1,43 @@
+# Armbian Build for ZNP-K1 (Elegoo Neptune 4 Series)
+
+This repository is a fork of the Armbian build system, tailored specifically for the ZNP-K1 Single Board Computer (SBC) used in Elegoo Neptune 4 series FDM 3D printers. This is a work-in-progress (WIP) custom build that aims to create a stable and optimized Armbian environment for the unique hardware configurations of the ZNP-K1, ensuring seamless integration with the Elegoo Neptune 4 series 3D printers.
+
+As of this writing, there are three ZNP-K1 variants/versions: 1.0, 1.1, and 2.0. These versions will require different kernel/DTS patches as the DTB differs between them.
+
+## Building the Image
+
+To build the Armbian image for ZNP-K1, follow these steps:
+
+1. **Clone the Repository**  
+   Clone this repository to your local machine using the command:
+   ```bash
+   git clone https://github.com/halfmanbear/Armbian-ZNP-K1-build.git
+   ```
+2. **Navigate to the Repository Directory**  
+
+3. **Run the Build Script**  
+Run the build script with the following command:  
+  ```bash
+   ./compile.sh BOARD=znp-k1 BRANCH=current RELEASE=bookworm BSPFREEZE=yes BUILD_MINIMAL=no BUILD_DESKTOP=no KERNEL_CONFIGURE=no EXTERNAL=yes EXTRAWIFI=yes INSTALL_HEADERS=yes
+  ```
+### Build Parameters
+
+This command initiates the build process with the following parameters:
+
+- `BOARD=znp-k1`: Specifies the target board as ZNP-K1.
+- `BRANCH=current`: Uses the current branch of Armbian.
+- `RELEASE=bookworm`: Sets Debian Bookworm as the base release.
+- `BSPFREEZE=yes`: Freezes BSP (Board Support Package) for consistent builds.
+- `BUILD_MINIMAL=no`: Includes standard packages, not just the minimal set.
+- `BUILD_DESKTOP=no`: Skips desktop environment for a headless setup.
+- `KERNEL_CONFIGURE=no`: Avoids manual kernel configuration during the build.
+- `EXTERNAL=yes`: Allows the use of external applications and scripts.
+- `EXTRAWIFI=yes`: Includes additional Wi-Fi drivers for enhanced support.
+- `INSTALL_HEADERS=yes`: Installs kernel headers necessary for module development.
+
+Feel free to modify these parameters as per your requirements.
+
+---------------------------------------------------------------------------
 <p align="center">
   <a href="#build-framework">
   <img src=".github/armbian-logo.png" alt="Armbian logo" width="144">
