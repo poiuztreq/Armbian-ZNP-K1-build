@@ -31,7 +31,6 @@ This command initiates the build process with the following parameters:
 - `BUILD_MINIMAL=no`: Includes standard packages, not just the minimal set.
 - `BUILD_DESKTOP=no`: Skips desktop environment for a headless setup.
 - `KERNEL_CONFIGURE=no`: Avoids manual kernel configuration during the build.
-- `EXTERNAL=yes`: Allows the use of external applications and scripts.
 - `EXTRAWIFI=yes`: Includes additional Wi-Fi drivers for enhanced support.
 - `INSTALL_HEADERS=yes`: Installs kernel headers necessary for module development.
 
