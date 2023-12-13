@@ -27,6 +27,19 @@ apt-get install -y ustreamer git python3-numpy python3-matplotlib libatlas-base-
 sudo adduser --gecos "" --disabled-password mks
 sudo usermod -c "mks" mks
 
+# Set the user's login shell to bash
+sudo usermod -s /bin/bash mks
+
+# Manually create home directory for 'mks' if it doesn't exist
+home_dir="${SDCARD}/home/mks"
+if [ ! -d "$home_dir" ]; then
+    sudo mkdir "$home_dir"
+    sudo chown mks:mks "$home_dir"
+    sudo chmod 750 "$home_dir"
+    sudo cp -a /etc/skel/. "$home_dir/"
+    sudo chown -R mks:mks "$home_dir"
+fi
+
 # Set password for both 'mks' and 'root' to 'makerbase'
 echo 'mks:makerbase' | chpasswd
 echo 'root:makerbase' | chpasswd
