@@ -13,6 +13,8 @@ handle_error() {
 # Trap errors
 trap 'handle_error $LINENO' ERR
 
+cp /etc/profile.d/armbian-firstlogin.sh $SDCARD/etc/profile.d/armbian-firstlogin.sh
+
 # Copy DTB files to the boot partition
 cp /tmp/overlay/boot/dtb/rockchip/*.dtb $SDCARD/boot/dtb/rockchip/
 
@@ -21,35 +23,11 @@ cp /tmp/overlay/etc/udev/rules.d/*.rules $SDCARD/etc/udev/rules.d/
 
 # Update package list and install packages
 apt-get update
-apt-get install -y ustreamer git python3-numpy python3-matplotlib libatlas-base-dev git
+apt-get install -y ustreamer git python3-numpy python3-matplotlib libatlas-base-dev
 
-# Add user 'mks'
-sudo adduser --gecos "" --disabled-password mks
-sudo usermod -c "mks" mks
-
-# Set the user's login shell to bash
-sudo usermod -s /bin/bash mks
-
-# Manually create home directory for 'mks' if it doesn't exist
-home_dir="${SDCARD}/home/mks"
-if [ ! -d "$home_dir" ]; then
-    sudo mkdir "$home_dir"
-    sudo chown mks:mks "$home_dir"
-    sudo chmod 750 "$home_dir"
-    sudo cp -a /etc/skel/. "$home_dir/"
-    sudo chown -R mks:mks "$home_dir"
-fi
-
-# Set password for both 'mks' and 'root' to 'makerbase'
-echo 'mks:makerbase' | chpasswd
-echo 'root:makerbase' | chpasswd
-
-rm -f /root/.not_logged_in_yet
-
-# Add 'mks' to 'gpio' and 'spiusers' groups, create groups if they don't exist
+# Create groups if they don't exist
 sudo groupadd gpio || true
 sudo groupadd spiusers || true
-sudo usermod -aG sudo,netdev,audio,video,dialout,plugdev,disk,games,users,systemd-journal,input,gpio,spiusers mks
 
 # Create and configure GPIO script
 SCRIPT_PATH="/usr/local/bin/set_gpio.sh"
@@ -68,5 +46,3 @@ sed -i "/^exit 0/i $SCRIPT_PATH" "$RC_LOCAL"
 CRON_ENTRY="*/10 * * * * /bin/sync"
 (crontab -l 2>/dev/null | grep -qF "$CRON_ENTRY") || (crontab -l 2>/dev/null; echo "$CRON_ENTRY") | crontab -
 
-# Clone Git repository as user 'mks'
-git clone https://github.com/halfmanbear/OpenNept4une.git /home/mks/OpenNept4une
