@@ -36,7 +36,7 @@ rm -f /root/.not_logged_in_yet
 # Add 'mks' to 'gpio' and 'spiusers' groups, create groups if they don't exist
 sudo groupadd gpio || true
 sudo groupadd spiusers || true
-sudo usermod -aG sudo,netdev,audio,video,dialout,plugdev,Bluetooth,gpio,spiusers mks
+sudo usermod -aG sudo,netdev,audio,video,dialout,plugdev,disk,games,users,systemd-journal,input,gpio,spiusers mks
 
 # Create and configure GPIO script
 SCRIPT_PATH="/usr/local/bin/set_gpio.sh"
