@@ -12,20 +12,6 @@
 [[ -f /etc/os-release ]] && . /etc/os-release
 [[ -z "$DISTRIB_CODENAME" ]] && DISTRIB_CODENAME="${VERSION_CODENAME}"
 [[ -n "$DISTRIB_CODENAME" && -f /etc/armbian-distribution-status ]] && DISTRIBUTION_STATUS=$(grep "$DISTRIB_CODENAME" /etc/armbian-distribution-status | cut -d"=" -f2)
-#!/bin/bash
-#
-# Copyright (c) Authors: https://www.armbian.com/authors
-#
-# This file is licensed under the terms of the GNU General Public
-# License version 2. This program is licensed "as is" without any
-# warranty of any kind, whether express or implied.
-
-# read distribution status
-# shellcheck source=/dev/null
-[[ -f /etc/lsb-release ]] && . /etc/lsb-release
-[[ -f /etc/os-release ]] && . /etc/os-release
-[[ -z "$DISTRIB_CODENAME" ]] && DISTRIB_CODENAME="${VERSION_CODENAME}"
-[[ -n "$DISTRIB_CODENAME" && -f /etc/armbian-distribution-status ]] && DISTRIBUTION_STATUS=$(grep "$DISTRIB_CODENAME" /etc/armbian-distribution-status | cut -d"=" -f2)
 
 . /etc/armbian-release
 
@@ -70,15 +56,13 @@ add_profile_sync_settings() {
 
 add_user() {
     RealUserName="mks"
-    RealName="Maker User"
+    RealName="mks"
     adduser --quiet --disabled-password --home /home/"$RealUserName" --gecos "$RealName" "$RealUserName"
     echo "makerbase" | passwd "$RealUserName" --stdin
     for additionalgroup in sudo netdev audio video disk tty users games dialout plugdev input bluetooth systemd-journal ssh gpio spi-dev; do
         usermod -aG "${additionalgroup}" "${RealUserName}"
     done
     echo -e "\nUser \e[0;92m${RealName}\x1B[0m (\e[0;92m${RealUserName}\x1B[0m) has been created with sudo privileges."
-}
-
 }
 
 if [[ -f /root/.not_logged_in_yet && -n $(tty) ]]; then
@@ -133,15 +117,15 @@ if [[ -f /root/.not_logged_in_yet && -n $(tty) ]]; then
 		loginfrom=$(who am i | awk '{print $2}')
 		who -la | grep root | grep -v "$loginfrom" | awk '{print $7}' | xargs --no-run-if-empty kill -9
 
-		first_input="$password"
+		first_input="makerbase"
 		echo ""
 		read_password "Repeat root"
-		second_input="$password"
+		second_input="makerbase"
 		echo ""
 		if [[ "$first_input" == "$second_input" ]]; then
 			# minimal might not have this
 			if command -v cracklib-check > /dev/null 2>&1; then
-				result="$(cracklib-check <<< "$password")"
+				result="$(cracklib-check <<< "$second_input")"
 				okay="$(awk -F': ' '{ print $2}' <<< "$result")"
 				if [[ "$okay" != "OK" ]]; then
 					echo -e "\n\e[0;31mWarning:\x1B[0m Weak password, $okay \b!"
@@ -152,7 +136,7 @@ if [[ -f /root/.not_logged_in_yet && -n $(tty) ]]; then
 				echo "$second_input"
 			) | passwd root > /dev/null 2>&1
 			break
-		elif [[ -n $password ]]; then
+		elif [[ -n $second_input ]]; then
 			echo -e "Rejected - \e[0;31mpasswords do not match.\x1B[0m Try again [${REPEATS}]."
 			REPEATS=$((REPEATS - 1))
 		fi
@@ -182,20 +166,7 @@ if [[ -f /root/.not_logged_in_yet && -n $(tty) ]]; then
 
 	# ask user to select shell
 	set_shell
-	
-
-	trap check_abort INT
-
-	while [ -f "/root/.not_logged_in_yet" ]; do
-		echo -e "\nCreating a new user account. Press <Ctrl-C> to abort"
-		[[ "${desktop_dm}" != "none" ]] && echo -e "\n\e[0;31mDesktop environment will not be enabled if you abort the new user creation\x1B[0m"
-		add_user
-	done
-	trap - INT TERM EXIT
-
-	if [[ ${USER_SHELL} == zsh ]]; then
-		printf "\nYou selected \e[0;91mZSH\x1B[0m as your default shell. If you want to use it right away, please logout and login! \n\n"
-	fi
+ 	add_user
 
 	# re-enable passing locale environment via ssh
 	sed -e '/^#AcceptEnv LANG/ s/^#//' -i /etc/ssh/sshd_config
