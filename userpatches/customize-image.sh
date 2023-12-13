@@ -25,17 +25,18 @@ apt-get install -y ustreamer git python3-numpy python3-matplotlib libatlas-base-
 
 # Add user 'mks'
 sudo adduser --gecos "" --disabled-password mks
-
+sudo usermod -c "mks" mks
 
 # Set password for both 'mks' and 'root' to 'makerbase'
 echo 'mks:makerbase' | chpasswd
 echo 'root:makerbase' | chpasswd
 
+rm -f /root/.not_logged_in_yet
+
 # Add 'mks' to 'gpio' and 'spiusers' groups, create groups if they don't exist
-sudo usermod -aG sudo mks
 sudo groupadd gpio || true
 sudo groupadd spiusers || true
-sudo usermod -a -G gpio,spiusers mks
+sudo usermod -aG sudo,netdev,audio,video,dialout,plugdev,Bluetooth,gpio,spiusers mks
 
 # Create and configure GPIO script
 SCRIPT_PATH="/usr/local/bin/set_gpio.sh"
