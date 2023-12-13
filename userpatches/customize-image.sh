@@ -44,3 +44,13 @@ sed -i "/^exit 0/i $SCRIPT_PATH" "$RC_LOCAL"
 CRON_ENTRY="*/10 * * * * /bin/sync"
 (crontab -l 2>/dev/null | grep -qF "$CRON_ENTRY") || (crontab -l 2>/dev/null; echo "$CRON_ENTRY") | crontab -
 
+# Add extraargs to armbianEnv.txt if not exists
+FILE_PATH="/boot/armbianEnv.txt"
+LINE_TO_ADD="extraargs=net.ifnames=0"
+if grep -q "$LINE_TO_ADD" "$FILE_PATH"; then
+    echo "The line '$LINE_TO_ADD' already exists in $FILE_PATH."
+else
+    echo "$LINE_TO_ADD" | sudo tee -a "$FILE_PATH" > /dev/null
+    echo "Added '$LINE_TO_ADD' to $FILE_PATH."
+fi
+
