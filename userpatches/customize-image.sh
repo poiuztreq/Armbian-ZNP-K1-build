@@ -29,7 +29,7 @@ sudo groupadd spiusers || true
 
 # Create and configure GPIO script
 SCRIPT_PATH="/usr/local/bin/set_gpio.sh"
-echo -e "#!/bin/bash\n/usr/bin/gpioset gpiochip1 14=0; /usr/bin/gpioset gpiochip1 15=0; sleep 0.5; /usr/bin/gpioset gpiochip1 15=1" > "$SCRIPT_PATH"
+echo -e "#!/bin/bash\n/usr/bin/gpioset gpiochip1 14=0; sleep 1; /usr/bin/gpioset gpiochip1 15=0; sleep 1; /usr/bin/gpioset gpiochip1 15=1" > "$SCRIPT_PATH"
 chmod +x "$SCRIPT_PATH"
 
 # Configure /etc/rc.local for startup script execution
