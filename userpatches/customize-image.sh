@@ -13,8 +13,6 @@ handle_error() {
 # Trap errors
 trap 'handle_error $LINENO' ERR
 
-cp /tmp/overlay/etc/profile.d/armbian-firstlogin.sh $SDCARD/etc/profile.d/armbian-firstlogin.sh
-
 # Copy DTB files to the boot partition
 cp /tmp/overlay/boot/dtb/rockchip/*.dtb $SDCARD/boot/dtb/rockchip/
 
