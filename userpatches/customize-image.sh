@@ -28,17 +28,17 @@ sudo groupadd gpio || true
 sudo groupadd spiusers || true
 
 # Create and configure GPIO script
-SCRIPT_PATH="/usr/local/bin/set_gpio.sh"
-echo -e "#!/bin/bash\n/usr/bin/gpioset gpiochip1 14=0; sleep 1; /usr/bin/gpioset gpiochip1 15=0; sleep 1; /usr/bin/gpioset gpiochip1 15=1" > "$SCRIPT_PATH"
-chmod +x "$SCRIPT_PATH"
+#SCRIPT_PATH="/usr/local/bin/set_gpio.sh"
+#echo -e "#!/bin/bash\n/usr/bin/gpioset gpiochip1 14=0; sleep 1; /usr/bin/gpioset gpiochip1 15=0; sleep 1; /usr/bin/gpioset gpiochip1 15=1" > "$SCRIPT_PATH"
+#chmod +x "$SCRIPT_PATH"
 
 # Configure /etc/rc.local for startup script execution
-RC_LOCAL="/etc/rc.local"
-if [ ! -f "$RC_LOCAL" ]; then
-    echo -e "#!/bin/bash\n\nexit 0" > "$RC_LOCAL"
-    chmod +x "$RC_LOCAL"
-fi
-sed -i "/^exit 0/i $SCRIPT_PATH" "$RC_LOCAL"
+#RC_LOCAL="/etc/rc.local"
+#if [ ! -f "$RC_LOCAL" ]; then
+#    echo -e "#!/bin/bash\n\nexit 0" > "$RC_LOCAL"
+#    chmod +x "$RC_LOCAL"
+#fi
+#sed -i "/^exit 0/i $SCRIPT_PATH" "$RC_LOCAL"
 
 # Add cron job to run sync command every 10 minutes
 CRON_ENTRY="*/10 * * * * /bin/sync"
