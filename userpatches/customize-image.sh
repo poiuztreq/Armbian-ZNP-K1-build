@@ -29,7 +29,7 @@ apt-get install -y ustreamer git python3-numpy python3-matplotlib libatlas-base-
 sudo groupadd gpio || true
 sudo groupadd spiusers || true
 
-sudo echo "$(date)" > /boot/.OpenNept4une.txt
+sudo sh -c 'echo "$(date)" > /boot/.OpenNept4une.txt'
 
 # Add cron job to run sync command every 10 minutes as printers are typically powercut instead of shut down.
 CRON_ENTRY="*/10 * * * * /bin/sync"
