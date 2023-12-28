@@ -29,18 +29,7 @@ apt-get install -y ustreamer git python3-numpy python3-matplotlib libatlas-base-
 sudo groupadd gpio || true
 sudo groupadd spiusers || true
 
-# Create and configure GPIO script for MCU Flash V1.0 only confirmed 
-#SCRIPT_PATH="/usr/local/bin/set_gpio.sh"
-#echo -e "#!/bin/bash\n/usr/bin/gpioset gpiochip1 14=0; sleep 1; /usr/bin/gpioset gpiochip1 15=0; sleep 1; /usr/bin/gpioset gpiochip1 15=1" > "$SCRIPT_PATH"
-#chmod +x "$SCRIPT_PATH"
-
-# Configure /etc/rc.local for startup script execution (above)
-#RC_LOCAL="/etc/rc.local"
-#if [ ! -f "$RC_LOCAL" ]; then
-#    echo -e "#!/bin/bash\n\nexit 0" > "$RC_LOCAL"
-#    chmod +x "$RC_LOCAL"
-#fi
-#sed -i "/^exit 0/i $SCRIPT_PATH" "$RC_LOCAL"
+echo "$(date)" > /boot/.OpenNept4une.txt
 
 # Add cron job to run sync command every 10 minutes as printers are typically powercut instead of shut down.
 CRON_ENTRY="*/10 * * * * /bin/sync"
