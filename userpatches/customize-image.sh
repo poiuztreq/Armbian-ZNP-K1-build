@@ -23,8 +23,52 @@ cp /tmp/overlay/etc/udev/rules.d/*.rules $SDCARD/etc/udev/rules.d/
 
 # Update package list and install packages
 apt-get update
-apt-get install -y ustreamer git python3-numpy python3-matplotlib libatlas-base-dev
 
+apt-get install -y \
+    ustreamer \
+    git \
+    python3-numpy \
+    python3-matplotlib \
+    libatlas-base-dev \
+    python3.11-venv \
+    virtualenv \
+    python-dev \
+    libffi-dev \
+    build-essential \
+    libncurses-dev \
+    libusb-dev \
+    avrdude \
+    gcc-avr \
+    binutils-avr \
+    avr-libc \
+    stm32flash \
+    libnewlib-arm-none-eabi \
+    gcc-arm-none-eabi \
+    binutils-arm-none-eabi \
+    libusb-1.0 \
+    pkg-config \
+    python3 \
+    python3-virtualenv \
+    python3-dev \
+    liblmdb-dev \
+    libopenjp2-7 \
+    libsodium-dev \
+    zlib1g-dev \
+    libjpeg-dev \
+    packagekit \
+    wireless-tools \
+    curl \
+    wget \
+    nginx \
+    crudini \
+    bsdutils \
+    findutils \
+    v4l-utils \
+    build-essential \
+    libevent-dev \
+    libjpeg-dev \
+    libbsd-dev
+	
 # Create gpio and spi groups if they don't exist (for led control v.1.1+ & ADXL SPI
 sudo groupadd gpio || true
 sudo groupadd spiusers || true
