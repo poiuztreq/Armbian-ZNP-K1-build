@@ -49,7 +49,6 @@ apt-get install -y \
     pkg-config \
     python3 \
     python3-virtualenv \
-    python3-dev \
     liblmdb-dev \
     libopenjp2-7 \
     libsodium-dev \
