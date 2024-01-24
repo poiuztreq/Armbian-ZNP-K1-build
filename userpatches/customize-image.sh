@@ -7,7 +7,6 @@
 # Function to handle errors
 handle_error() {
     echo "Error occurred in script at line: $1"
-    exit 1
 }
 
 # Trap errors
