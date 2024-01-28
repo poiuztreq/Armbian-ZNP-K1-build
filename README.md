@@ -18,7 +18,7 @@ To build the Armbian image for ZNP-K1, follow these steps:
 3. **Run the Build Script**  
 Run the build script with the following command:  
   ```bash
-   ./compile.sh BOARD=znp-k1 BRANCH=current RELEASE=bookworm BSPFREEZE=yes BUILD_MINIMAL=no BUILD_DESKTOP=no KERNEL_CONFIGURE=no EXTRAWIFI=yes COMPRESS_OUTPUTIMAGE=xz
+   ./compile.sh BOARD=znp-k1 BRANCH=edge RELEASE=bookworm BSPFREEZE=yes BUILD_MINIMAL=no BUILD_DESKTOP=no KERNEL_CONFIGURE=no EXTRAWIFI=yes INSTALL_HEADERS=yes COMPRESS_OUTPUTIMAGE=xz
   ```
 ### Build Parameters
 
