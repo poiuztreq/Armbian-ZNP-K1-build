@@ -20,6 +20,18 @@ cp /tmp/overlay/boot/dtb/rockchip/*.dtb $SDCARD/boot/dtb/rockchip/
 # Copy SPI & GPIO group permission rules files to the rules.d folder
 cp /tmp/overlay/etc/udev/rules.d/*.rules $SDCARD/etc/udev/rules.d/
 
+FLAG_FILE="/boot/.OpenNept4une.txt"
+
+# Ensure the flag file exists and update its timestamp
+sudo touch "$FLAG_FILE"
+
+# Get system information including the current date and the specific string
+BUILD_INFO="$(date +"%Y-%m-%d") - OpenNept4une-v0.1.6-ZNP-K1"
+
+# Enter info into flag file
+echo "$BUILD_INFO" | sudo tee -a "$FLAG_FILE" > /dev/null
+
+
 # Update package list and install packages
 apt-get update
 
