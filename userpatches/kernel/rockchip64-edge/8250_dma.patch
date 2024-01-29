@@ -18,7 +18,7 @@ index 7fa66501792d..247468ce448e 100644
  	 * could acquire port's lock and it might still be ongoing. Don't to
  	 * anything in such case.
  	 */
-+        dma->rx_running = 0;
++       dma->rx_running = 0;
  	dma_status = dmaengine_tx_status(dma->rxchan, dma->rx_cookie, &state);
 -	if (dma_status == DMA_IN_PROGRESS)
 -		return;
