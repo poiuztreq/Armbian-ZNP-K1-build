@@ -22,27 +22,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run compile (should fail)
-        continue-on-error: true
-        run: |
-          ./compile.sh \
-            BOARD=znp-k1 \
-            BRANCH=${{ env.RELEASE_BRANCH }} \
-            RELEASE=bookworm \
-            BSPFREEZE=yes \
-            BUILD_MINIMAL=no \
-            BUILD_DESKTOP=no \
-            KERNEL_CONFIGURE=no \
-            EXTRAWIFI=yes \
-            INSTALL_HEADERS=yes \
-            VENDOR=OpenNept4une \
-            COMPRESS_OUTPUTIMAGE=xz
-
-      - name: Patch cache permissions
-        run: |
-          sudo chown -R root:root cache/git-bare
-
-      - name: Run compilation again
+      - name: Compile
         run: |
           ./compile.sh \
             BOARD=znp-k1 \
