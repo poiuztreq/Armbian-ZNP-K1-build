@@ -44,6 +44,7 @@ jobs:
       - name: Release
         uses: ncipollo/release-action@v1
         with:
+          prerelease: true
           allowUpdates: true
           name: ${{ github.ref_name }}-${{ steps.get-filename.outputs.filename }}
           artifacts: output/images/${{ steps.get-filename.outputs.filename }}.img.xz, output/images/${{ steps.get-filename.outputs.filename }}.img.txt
