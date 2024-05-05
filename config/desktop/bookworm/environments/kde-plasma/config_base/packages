@@ -24,8 +24,6 @@ fonts-dejavu-core
 fonts-freefont-ttf
 fonts-guru
 fonts-guru-extra
-fonts-kacst
-fonts-kacst-one
 fonts-liberation
 fonts-nanum
 fonts-opensymbol
@@ -86,7 +84,7 @@ pavucontrol-qt
 pavumeter
 plasma-discover
 policykit-1
-printer-driver-all
+#printer-driver-all
 profile-sync-daemon
 pulseaudio-module-bluetooth
 redshift

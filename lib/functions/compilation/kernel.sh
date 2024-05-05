@@ -120,9 +120,9 @@ function kernel_prepare_build_and_package() {
 
 	# define dict with vars passed and target directories
 	declare -A kernel_install_dirs=(
-		["INSTALL_PATH"]="${kernel_dest_install_dir}/image/boot"  # Used by `make install`
-		["INSTALL_MOD_PATH"]="${kernel_dest_install_dir}/modules" # Used by `make modules_install`
-		#["INSTALL_HDR_PATH"]="${kernel_dest_install_dir}/libc_headers" # Used by `make headers_install` - disabled, only used for libc headers
+		["INSTALL_PATH"]="${kernel_dest_install_dir}/image/boot"       # Used by `make install`
+		["INSTALL_MOD_PATH"]="${kernel_dest_install_dir}/modules"      # Used by `make modules_install`
+		["INSTALL_HDR_PATH"]="${kernel_dest_install_dir}/libc_headers" # Used by `make headers_install` for libc headers
 	)
 
 	[ -z "${SRC_LOADADDR}" ] || install_make_params_quoted+=("${SRC_LOADADDR}") # For uImage
@@ -133,7 +133,8 @@ function kernel_prepare_build_and_package() {
 
 	install_make_params_quoted+=("INSTALL_MOD_STRIP=1") # strip modules during install
 
-	build_targets+=("modules_install") # headers_install disabled, only used for libc headers
+	build_targets+=("modules_install")
+	build_targets+=("headers_install") # headers_install for libc headers
 	if [[ "${KERNEL_BUILD_DTBS:-yes}" == "yes" ]]; then
 		display_alert "Kernel build will produce DTBs!" "DTBs YES" "debug"
 		build_targets+=("dtbs_install")
@@ -201,8 +202,13 @@ function kernel_dtb_only_build() {
 		declare preprocessed_fdt_normalized="${SRC}/output/${fdt_dir}-${fdt_file}--${KERNEL_MAJOR_MINOR}-${BRANCH}.preprocessed.normalized.dts"
 		run_host_command_logged dtc -I dts -O dts -o "${preprocessed_fdt_normalized}" "${preprocessed_fdt_dest}"
 
+		# Remove phandles and hex references, probably the worst way possible (grep) -- somehow the diff is reasonable then.
+		declare preprocessed_fdt_normalized_nophandles="${SRC}/output/${fdt_dir}-${fdt_file}--${KERNEL_MAJOR_MINOR}-${BRANCH}.preprocessed.normalized.nophandles.dts"
+		grep -v -e "phandle =" -e "connect =" -e '= <0x' "${preprocessed_fdt_normalized}" > "${preprocessed_fdt_normalized_nophandles}"
+
 		display_alert "Kernel DTB-only for development" "Preprocessed FDT dest: ${preprocessed_fdt_dest}" "warn"
 		display_alert "Kernel DTB-only for development" "Preprocessed FDT normalized: ${preprocessed_fdt_normalized}" "warn"
+		display_alert "Kernel DTB-only for development" "Preprocessed FDT normalized, no phandles: ${preprocessed_fdt_normalized_nophandles}" "warn"
 	fi
 
 	return 0

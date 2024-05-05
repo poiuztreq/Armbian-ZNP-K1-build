@@ -5,6 +5,10 @@ function add_host_dependencies__abl_host_deps() {
 function post_build_image__900_convert_to_abl_img() {
 	[[ -z $version ]] && exit_with_error "version is not set"
 
+	if [ ! -z "$BOOTFS_TYPE" ]; then
+		return 0
+	fi
+
 	display_alert "Converting image $version to rootfs" "${EXTENSION}" "info"
 	declare -g ROOTFS_IMAGE_FILE="${DESTIMG}/${version}.rootfs.img"
 	rootfs_start_sector=$(gdisk -l ${DESTIMG}/${version}.img | grep rootfs | awk '{print $2}')
@@ -15,7 +19,7 @@ function post_build_image__900_convert_to_abl_img() {
 	old_rootfs_image_mount_dir=${DESTIMG}/rootfs-old
 	new_rootfs_image_mount_dir=${DESTIMG}/rootfs-new
 	mkdir -p ${old_rootfs_image_mount_dir} ${new_rootfs_image_mount_dir}
-	truncate --size=8192M ${ROOTFS_IMAGE_FILE}
+	truncate --size=9216M ${ROOTFS_IMAGE_FILE}
 	mkfs.ext4 -F ${ROOTFS_IMAGE_FILE}
 	new_rootfs_image_uuid=$(blkid -s UUID -o value ${ROOTFS_IMAGE_FILE})
 	mount ${DESTIMG}/rootfs.img ${old_rootfs_image_mount_dir}
