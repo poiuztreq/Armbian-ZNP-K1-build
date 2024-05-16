@@ -50,8 +50,8 @@ jobs:
           artifacts: output/images/${{ steps.get-filename.outputs.filename }}.img.xz, output/images/${{ steps.get-filename.outputs.filename }}.img.txt
           body: |
             This is a release version of the base image, compiled by GitHub Actions.
-            Configured to boot on v1.0 boards only.
 
+            Configured to boot on v1.1 boards only.
             Mind that this image is empty and should be used as a base for further customization.
 
             For more details, please see the logs [here](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
