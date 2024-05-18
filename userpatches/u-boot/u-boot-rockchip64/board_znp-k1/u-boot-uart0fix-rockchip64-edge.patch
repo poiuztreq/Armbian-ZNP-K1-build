@@ -12,20 +12,21 @@ diff --git a/arch/arm/dts/rk3328-roc-cc.dts b/arch/arm/dts/rk3328-roc-cc.dts
 index aa22a0c222..51bfb81ba9 100644
 --- a/arch/arm/dts/rk3328-roc-cc.dts
 +++ b/arch/arm/dts/rk3328-roc-cc.dts
-@@ -352,10 +352,14 @@
+@@ -352,6 +352,10 @@
  
  &u2phy_otg {
- 	status = "okay";
+     status = "okay";
  };
  
 +&uart0 {
-+	pinctrl-0 = <&gpiochip0 0 GPIO_ACTIVE_HIGH>; // GPIO 0 für UART0
-+	status = "okay";
++    pinctrl-0 = <&gpiochip0 0 GPIO_ACTIVE_HIGH>;
++    status = "okay";
 +};
  
  &uart2 {
- 	status = "okay";
+     status = "okay";
  };
+
  
  &usb20_otg {
 -- 
