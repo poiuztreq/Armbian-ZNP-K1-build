@@ -12,8 +12,8 @@ handle_error() {
 # Trap errors
 trap 'handle_error $LINENO' ERR
 
-# Copy DTB files to the boot partition by default this is for v.1.0 boards 
-# Although it does copy all dtb variants that can be renamed / replace the current 
+# Copy DTB files to the boot partition by default this is for v.1.0 boards
+# Although it does copy all dtb variants that can be renamed / replace the current
 # /boot/dtb/rockchip/rk3328-roc-cc.dtb
 cp /tmp/overlay/boot/dtb/rockchip/*.dtb $SDCARD/boot/dtb/rockchip/
 
@@ -34,7 +34,7 @@ apt-get install -y \
     libatlas-base-dev \
     python3.11-venv \
     virtualenv \
-    python-dev \
+    python-dev-is-python3 \
     libffi-dev \
     build-essential \
     libncurses-dev \
@@ -69,7 +69,7 @@ apt-get install -y \
     libevent-dev \
     libjpeg-dev \
     libbsd-dev
-	
+
 # Create gpio and spi groups if they don't exist (for led control v.1.1+ & ADXL SPI
 sudo groupadd gpio || true
 sudo groupadd spiusers || true
