@@ -19,7 +19,6 @@ index aa22a0c222..51bfb81ba9 100644
  };
  
 +&uart0 {
-+    pinctrl-0 = <&gpiochip0 0 GPIO_ACTIVE_HIGH>; // GPIO 0 für UART0
 +    status = "okay";
 +};
  
