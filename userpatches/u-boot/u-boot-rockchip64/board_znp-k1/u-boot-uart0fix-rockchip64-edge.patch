@@ -1,33 +1,30 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: John Doe <john.doe@somewhere.on.planet>
 Date: Wed, 13 Dec 2023 16:22:11 +0000
-Subject: Patching u-boot rockchip64 files /arch/arm/dts/rk3328-roc-cc.dts
+Subject: Patching u-boot rockchip64 files arch/arm/dts/rk3328-roc-cc.dts
 
 Signed-off-by: John Doe <john.doe@somewhere.on.planet>
 ---
- arch/arm/boot/dts/rockchip/rk3328-roc-cc.dts | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ arch/arm/dts/rk3328-roc-cc.dts | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/arch/arm/dts/rk3328-roc-cc.dts b/arch/arm/dts/rk3328-roc-cc.dts
 index aa22a0c222..51bfb81ba9 100644
 --- a/arch/arm/dts/rk3328-roc-cc.dts
 +++ b/arch/arm/dts/rk3328-roc-cc.dts
-@@ -352,6 +352,15 @@
+@@ -352,10 +352,14 @@
  
  &u2phy_otg {
-     status = "okay";
+ 	status = "okay";
  };
  
 +&uart0 {
-+    pinctrl-names = "default";
-+    pinctrl-0 = <&uart0_pins>;
-+    status = "okay";
++        status = "okay";
 +};
 +
  &uart2 {
-     status = "okay";
+ 	status = "okay";
  };
-
  
  &usb20_otg {
 -- 
