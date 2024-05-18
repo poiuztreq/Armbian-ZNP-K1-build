@@ -5,23 +5,25 @@ Subject: Patching u-boot rockchip64 files arch/arm/boot/dts/rockchip/rk3328-roc-
 
 Signed-off-by: John Doe <john.doe@somewhere.on.planet>
 ---
- arch/arm/boot/dts/rockchip/rk3328-roc-cc.dts | 4 ++++
- 1 file changed, 4 insertions(+)
+ arch/arm/boot/dts/rockchip/rk3328-roc-cc.dts | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
 diff --git a/arch/arm/boot/dts/rockchip/rk3328-roc-cc.dts b/arch/arm/boot/dts/rockchip/rk3328-roc-cc.dts
 index aa22a0c222..51bfb81ba9 100644
 --- a/arch/arm/boot/dts/rockchip/rk3328-roc-cc.dts
 +++ b/arch/arm/boot/dts/rockchip/rk3328-roc-cc.dts
-@@ -352,6 +352,10 @@
+@@ -352,6 +352,15 @@
  
  &u2phy_otg {
      status = "okay";
  };
  
 +&uart0 {
++    pinctrl-names = "default";
++    pinctrl-0 = <&uart0_pins>;
 +    status = "okay";
 +};
- 
++
  &uart2 {
      status = "okay";
  };
