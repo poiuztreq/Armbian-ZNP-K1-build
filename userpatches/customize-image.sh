@@ -68,7 +68,8 @@ apt-get install -y \
     build-essential \
     libevent-dev \
     libjpeg-dev \
-    libbsd-dev
+    libbsd-dev \
+	dfu-util
 
 # Create gpio and spi groups if they don't exist (for led control v.1.1+ & ADXL SPI
 sudo groupadd gpio || true
