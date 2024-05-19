@@ -1,57 +1,39 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: John Doe <john.doe@somewhere.on.planet>
 Date: Wed, 13 Dec 2023 16:22:11 +0000
-Subject: [PATCH] Enable UART0 and UART1 in rk3328-roc-cc.dts
+Subject: Enable uart0 in rk3328-roc-cc.dts
 
 Signed-off-by: John Doe <john.doe@somewhere.on.planet>
 ---
- arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts | 29 ++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
+ arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts b/arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts
 index aa22a0c222..51bfb81ba9 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts
 +++ b/arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts
-@@ -63,6 +63,35 @@
- 		status = "okay";
+@@ -353,6 +353,18 @@
+ 	status = "okay";
  };
 
-+&serial0 {
-+	compatible = "rockchip,rk3328-uart\0snps,dw-apb-uart";
-+	reg = <0x00 0xff110000 0x00 0x100>;
-+	interrupts = <0x00 0x37 0x04>;
-+	clocks = <0x02 0x26 0x02 0xd2>;
-+	clock-names = "baudclk\0apb_pclk";
-+	dmas = <0x12 0x02 0x12 0x03>;
-+	dma-names = "tx\0rx";
++&uart0 {
 +	pinctrl-names = "default";
-+	pinctrl-0 = <0x21 0x22>;
-+	reg-io-width = <0x04>;
-+	reg-shift = <0x02>;
++	pinctrl-0 = <&uart0_xfer>;
 +	status = "okay";
-+	phandle = <0x7d>;
 +};
 +
-+&serial1 {
-+	compatible = "rockchip,rk3328-uart\0snps,dw-apb-uart";
-+	reg = <0x00 0xff120000 0x00 0x100>;
-+	interrupts = <0x00 0x38 0x04>;
-+	clocks = <0x02 0x27 0x02 0xd3>;
-+	clock-names = "baudclk\0apb_pclk";
-+	dmas = <0x12 0x04 0x12 0x05>;
-+	dma-names = "tx\0rx";
-+	pinctrl-names = "default";
-+	pinctrl-0 = <0x23 0x24 0x25>;
-+	reg-io-width = <0x04>;
-+	reg-shift = <0x02>;
-+	status = "okay";
-+	phandle = <0x7e>;
-+};
- 
  &uart2 {
  	status = "okay";
  };
 
++&pinctrl {
++	uart0_xfer: uart0-xfer {
++		rockchip,pins = <0 RK_PA0 RK_FUNC_UART0_TX>, <0 RK_PA1 RK_FUNC_UART0_RX>;
++	};
++};
++
+ &usb20_otg {
+ 	dr_mode = "host";
+ 	status = "okay";
 -- 
-2.17.1
-
+2.30.1
