@@ -69,6 +69,10 @@ apt-get install -y \
     libevent-dev \
     libjpeg-dev \
     libbsd-dev \
+	python3-pip \
+ 	python3-setuptools \
+ 	python3-wheel \
+ 	libjpeg62-turbo-dev \
 	dfu-util
 
 # Create gpio and spi groups if they don't exist (for led control v.1.1+ & ADXL SPI
