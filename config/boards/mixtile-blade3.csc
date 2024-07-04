@@ -2,7 +2,7 @@
 declare -g BOARD_NAME="Mixtile Blade 3"
 declare -g BOARDFAMILY="rockchip-rk3588"
 declare -g BOARD_MAINTAINER="rpardini"
-declare -g KERNEL_TARGET="legacy,vendor,edge"
+declare -g KERNEL_TARGET="vendor,edge"
 declare -g BOOT_FDT_FILE="rockchip/rk3588-blade3-v101-linux.dtb" # Included in https://github.com/armbian/linux-rockchip/pull/64 # has a hook to change it for edge below
 
 declare -g BOOT_SCENARIO="spl-blobs" # so we don't depend on defconfig naming convention
@@ -13,6 +13,7 @@ declare -g UEFI_EDK2_BOARD_ID="blade3" # This _only_ used for uefi-edk2-rk3588 e
 
 # newer blobs from rockchip. tested to work.
 # set as variables, early, so they're picked up by `prepare_boot_configuration()`
+# @TODO: consider removing those, as the defaults in rockchip64_common have been bumped up
 declare -g DDR_BLOB='rk35/rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.11.bin'
 declare -g BL31_BLOB='rk35/rk3588_bl31_v1.38.elf'
 
