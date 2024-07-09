@@ -5,27 +5,31 @@ Subject: Patching u-boot rockchip64 files arch/arm/dts/rk3328-roc-cc.dts
 
 Signed-off-by: John Doe <john.doe@somewhere.on.planet>
 ---
- arch/arm/dts/rk3328-roc-cc.dts | 4 ++++
- 1 file changed, 4 insertions(+)
+ arch/arm/dts/rk3328-roc-cc.dts | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/arch/arm/dts/rk3328-roc-cc.dts b/arch/arm/dts/rk3328-roc-cc.dts
 index aa22a0c222..51bfb81ba9 100644
 --- a/arch/arm/dts/rk3328-roc-cc.dts
 +++ b/arch/arm/dts/rk3328-roc-cc.dts
-@@ -352,6 +352,10 @@
+@@ -352,10 +352,18 @@
  
  &u2phy_otg {
  	status = "okay";
  };
-+
-+&uart0 {
-+        status = "okay";
-+};
  
++&uart0 {
++	pinctrl-0 = <&uart0_xfer &uart0_cts>;
++	status = "okay";
++};
++
  &uart2 {
  	status = "okay";
  };
-
+ 
+ &usb20_otg {
+ 	dr_mode = "host";
+ 	status = "okay";
+ };
 -- 
 Created with Armbian build tools https://github.com/armbian/build
-
