@@ -27,9 +27,5 @@ index aa22a0c222..51bfb81ba9 100644
  	status = "okay";
  };
  
- &usb20_otg {
- 	dr_mode = "host";
- 	status = "okay";
- };
 -- 
 Created with Armbian build tools https://github.com/armbian/build
