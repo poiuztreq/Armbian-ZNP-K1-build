@@ -27,5 +27,18 @@ index aa22a0c222..51bfb81ba9 100644
  	status = "okay";
  };
  
++&pinctrl {
++	uart0_xfer: uart0-xfer {
++		rockchip,pins = <0 RK_PA0 RK_FUNC_UART0_TX>, <0 RK_PA1 RK_FUNC_UART0_RX>;
++	};
++	uart0_cts: uart0-cts {
++		rockchip,pins = <0 RK_PA3 RK_FUNC_UART0_CTS>;
++	};
++};
++
+ &usb20_otg {
+ 	dr_mode = "host";
+ 	status = "okay";
 -- 
 Created with Armbian build tools https://github.com/armbian/build
+
