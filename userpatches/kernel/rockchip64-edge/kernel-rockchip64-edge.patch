@@ -47,8 +47,5 @@ index aa22a0c222..51bfb81ba9 100644
 +	};
 +};
 +
- &usb20_otg {
- 	dr_mode = "host";
- 	status = "okay";
 -- 
 2.30.1
