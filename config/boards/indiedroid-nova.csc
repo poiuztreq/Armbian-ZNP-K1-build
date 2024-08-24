@@ -4,14 +4,14 @@ declare -g BOARD_MAINTAINER="lanefu"
 declare -g BOARDFAMILY="rockchip-rk3588"
 declare -g BOOTCONFIG="indiedroid_defconfig" # vendor name, not standard, see hook below, set BOOT_SOC below to compensate
 declare -g BOOT_SOC="rk3588"
-declare -g KERNEL_TARGET="vendor,collabora,edge"
+declare -g KERNEL_TARGET="edge,current,vendor"
 declare -g FULL_DESKTOP="yes"
 declare -g BOOT_LOGO="desktop"
 declare -g BOOT_FDT_FILE="rockchip/rk3588s-indiedroid-nova.dtb"
 declare -g BOOT_SCENARIO="spl-blobs"
 declare -g BOOT_SUPPORT_SPI="no"
 declare -g IMAGE_PARTITION_TABLE="gpt"
-declare -g SRC_EXTLINUX="no" # going back to standard uboot for now
+declare -g SRC_EXTLINUX="no"                    # going back to standard uboot for now
 declare -g UEFI_EDK2_BOARD_ID="indiedroid-nova" # This _only_ used for uefi-edk2-rk3588 extension
 
 # @TODO: consider removing those, as the defaults in rockchip64_common have been bumped up

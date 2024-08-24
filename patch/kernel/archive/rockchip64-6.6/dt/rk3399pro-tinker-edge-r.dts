@@ -3,6 +3,7 @@
  * Copyright (c) 2019 Fuzhou Rockchip Electronics Co., Ltd
  * Copyright (c) 2019 Radxa Limited
  * Copyright (c) 2019 Amarula Solutions(India)
+ * Copyright (c) 2024 ARCW <wmx129674@126.com> rk3399pro-tinker_edge_r
  */
 
 /dts-v1/;
@@ -304,8 +305,20 @@
 		<000000000 0x0000 0x0000 0x0000>;
 };
 
+&hdmi_in_vopb {
+	status = "okay";
+};
+
 &hdmi_in_vopl {
 	status = "disabled";
+};
+
+&dp_in_vopl {
+	status = "disable";
+};
+
+&dp_in_vopb {
+	status = "okay";
 };
 
 &vopb {
@@ -756,6 +769,12 @@
 };
 
 &pcie0 {
+	pinctrl-0 = <&pcie_clkreqnb_cpm>;
+	bus-scan-delay-ms = <0>;
+	pinctrl-names = "default";
+	vpcie0v9-supply = <&vcca0v9_s3>;	/* VCC_0V9_S0 */
+	vpcie1v8-supply = <&vcc1v8_s0>;	/* VCC_1V8_S0 */
+	vpcie3v3-supply = <&vccio_3v3>;
 	status = "okay";
 };
 

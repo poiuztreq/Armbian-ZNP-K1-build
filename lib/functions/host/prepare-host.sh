@@ -282,6 +282,7 @@ function adaptative_prepare_host_dependencies() {
 		parted gdisk fdisk                       # partition tools @TODO why so many?
 		aria2 curl wget axel                     # downloaders et al
 		parallel                                 # do things in parallel (used for fast md5 hashing in initrd cache)
+		rdfind                                   # armbian-firmware-full/linux-firmware symlink creation step
 	)
 
 	# @TODO: distcc -- handle in extension?
@@ -297,7 +298,7 @@ function adaptative_prepare_host_dependencies() {
 	host_dependencies+=("libgnutls28-dev")
 
 	# Noble and later releases do not carry "python3-distutils" https://docs.python.org/3.10/whatsnew/3.10.html#distutils-deprecated
-	if [[ "noble" == *"${host_release}"* ]]; then
+	if [[ "$host_release" =~ ^(noble|wilma)$ ]]; then
 		display_alert "python3-distutils not available on host release '${host_release}'" "distutils was deprecated with Python 3.12" "debug"
 	else
 		host_dependencies+=("python3-distutils")
@@ -339,6 +340,12 @@ function adaptative_prepare_host_dependencies() {
 
 	if [[ "${wanted_arch}" != "amd64" ]]; then
 		host_dependencies+=(libc6-amd64-cross) # Support for running x86 binaries (under qemu on other arches)
+	fi
+
+	if [[ "${KERNEL_COMPILER}" == "clang" ]]; then
+		host_dependencies+=("clang")
+		host_dependencies+=("llvm")
+		host_dependencies+=("lld")
 	fi
 
 	declare -g EXTRA_BUILD_DEPS=""

@@ -3,6 +3,7 @@ BOARD_NAME="Odroid C1"
 BOARDFAMILY="meson8b"
 BOARD_MAINTAINER=""
 KERNEL_TARGET="current,edge"
+KERNEL_TEST_TARGET="current"
 
 BOOTDIR='u-boot-odroidc1'
 BOOTSOURCE='https://github.com/hardkernel/u-boot.git'
@@ -19,8 +20,8 @@ BOOTSIZE="200"
 BOOTFS_TYPE="fat"
 
 write_uboot_platform() {
-    dd if=$1/bl1.bin.hardkernel of=$2 bs=1 count=442 conv=fsync > /dev/null 2>&1
-    dd if=$1/bl1.bin.hardkernel of=$2 bs=512 skip=1 seek=1 conv=fsync > /dev/null 2>&1
-    dd if=$1/u-boot.bin of=$2 bs=512 seek=64 conv=fsync > /dev/null 2>&1
-    dd if=/dev/zero of=$2 seek=1024 count=32 bs=512 conv=fsync > /dev/null 2>&1
+	dd if=$1/bl1.bin.hardkernel of=$2 bs=1 count=442 conv=fsync > /dev/null 2>&1
+	dd if=$1/bl1.bin.hardkernel of=$2 bs=512 skip=1 seek=1 conv=fsync > /dev/null 2>&1
+	dd if=$1/u-boot.bin of=$2 bs=512 seek=64 conv=fsync > /dev/null 2>&1
+	dd if=/dev/zero of=$2 seek=1024 count=32 bs=512 conv=fsync > /dev/null 2>&1
 }

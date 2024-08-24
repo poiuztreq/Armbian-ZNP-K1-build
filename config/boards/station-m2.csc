@@ -3,7 +3,8 @@ BOARD_NAME="Station M2"
 BOARDFAMILY="rk35xx"
 BOARD_MAINTAINER=""
 BOOTCONFIG="station-m2-rk3566_defconfig"
-KERNEL_TARGET="vendor,current,edge"
+KERNEL_TARGET="edge,current,vendor"
+KERNEL_TEST_TARGET="current"
 FULL_DESKTOP="yes"
 BOOT_LOGO="desktop"
 BOOT_FDT_FILE="rockchip/rk3566-firefly-roc-pc.dtb"
@@ -12,7 +13,7 @@ ASOUND_STATE="asound.state.station-m2"
 IMAGE_PARTITION_TABLE="gpt"
 
 function post_family_tweaks__station_m2() {
-    display_alert "$BOARD" "Installing board tweaks" "info"
+	display_alert "$BOARD" "Installing board tweaks" "info"
 
 	cp -R $SRC/packages/blobs/station/firmware/* $SDCARD/lib/firmware/
 
